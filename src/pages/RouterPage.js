@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -10,8 +10,6 @@ import {
 
 import { Layout, Menu } from 'antd';
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
@@ -21,24 +19,32 @@ import { Ingressar } from './Ingressar';
 import { Cola } from './Cola';
 import { CrearTicket } from './CrearTicket';
 import { Work } from './Work';
+import { UiContext } from '../context/UiContext';
 
 const { Sider, Content } = Layout;
 
 export const RouterPage = () => {
+
+  const { ocultarMenu } = useContext(UiContext)
+
   return (
     <Router>
       <Layout style={{ height: '100vh' }}>
-        <Sider hidden={false}>
+        <Sider
+          collapsedWidth="0"
+          breakpoint="md"
+          hidden={ocultarMenu}
+        >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<UserOutlined />}>
-              <Link to="/ingressar">Ingressar</Link>
+              <Link to="/ingressar">Inicio</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              <Link to="/cola">Cola de Tickets</Link>
+              <Link to="/cola">Mostrar Tickets</Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
-              <Link to="/crear">Cola de Tickets</Link>
+              <Link to="/crear">Criar Tickets</Link>
             </Menu.Item>
           </Menu>
         </Sider>
