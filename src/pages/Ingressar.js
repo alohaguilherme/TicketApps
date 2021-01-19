@@ -24,10 +24,10 @@ export const Ingressar = () => {
   const [usuario] = useState(getUsuarioStorage());
   useHideMenu(false);
 
-  const onFinish = ({ agente, escritorio }) => {
+  const onFinish = ({ agent, work }) => {
 
-    localStorage.setItem('agente', agente);
-    localStorage.setItem('escritorio', escritorio);
+    localStorage.setItem('agent', agent);
+    localStorage.setItem('work', work);
 
     history.push('/work');
   };
@@ -36,14 +36,14 @@ export const Ingressar = () => {
     console.log('Failed:', errorInfo);
   };
 
-  if (usuario.agente && usuario.escritorio) {
+  if (usuario.agent && usuario.work) {
     return <Redirect to='/work' />
   }
 
   return (
     <>
       <Title level={2}>Entrar</Title>
-      <Text level={2}>Informe o nome e a número de escritório do agente.</Text>
+      <Text level={2}>Informe o nome e a número de escritório do agent.</Text>
       <Divider />
 
       <Form
@@ -55,7 +55,7 @@ export const Ingressar = () => {
       >
         <Form.Item
           label="Agente"
-          name="agente"
+          name="agent"
           rules={[{ required: true, message: 'Por favor preencha o nome!' }]}
         >
           <Input />
@@ -63,7 +63,7 @@ export const Ingressar = () => {
 
         <Form.Item
           label="Escritorio"
-          name="escritorio"
+          name="work"
           rules={[{ required: true, message: 'Informe o escritório!' }]}
         >
           <InputNumber min={1} max={99} />

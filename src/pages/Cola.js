@@ -8,38 +8,38 @@ const { Title, Text } = Typography
 const data = [
   {
     ticketNo: 33,
-    escritorio: 3,
-    agente: 'Fernando Herrera'
+    work: 3,
+    agent: 'Fernando Herrera'
   },
   {
     ticketNo: 34,
-    escritorio: 4,
-    agente: 'Melissa Flores'
+    work: 4,
+    agent: 'Melissa Flores'
   },
   {
     ticketNo: 35,
-    escritorio: 5,
-    agente: 'Carlos Castro'
+    work: 5,
+    agent: 'Carlos Castro'
   },
   {
     ticketNo: 36,
-    escritorio: 3,
-    agente: 'Fernando Herrera'
+    work: 3,
+    agent: 'Fernando Herrera'
   },
   {
     ticketNo: 37,
-    escritorio: 3,
-    agente: 'Fernando Herrera'
+    work: 3,
+    agent: 'Fernando Herrera'
   },
   {
     ticketNo: 38,
-    escritorio: 2,
-    agente: 'Melissa Flores'
+    work: 2,
+    agent: 'Melissa Flores'
   },
   {
     ticketNo: 39,
-    escritorio: 5,
-    agente: 'Carlos Castro'
+    work: 5,
+    agent: 'Carlos Castro'
   },
 ];
 
@@ -59,8 +59,8 @@ export const Cola = () => {
                 <Card
                   style={{ width: 300, marginTop: 16 }}
                   actions={[
-                    <Tag color="volcano">{item.agente}</Tag>,
-                    <Tag color="magenta">Escritório: {item.escritorio}</Tag>
+                    <Tag color="volcano">{item.agent}</Tag>,
+                    <Tag color="magenta">Escritório: {item.work}</Tag>
                   ]
                   }
                 >
@@ -83,8 +83,8 @@ export const Cola = () => {
                     <>
                       <Text>No escritório: </Text>
                       <Tag color="magenta">{item.ticketNo}</Tag>
-                      <Text>Agente: </Text>
-                      <Tag color="volcano">{item.agente}</Tag>
+                      <Text>agent: </Text>
+                      <Tag color="volcano">{item.agent}</Tag>
                     </>
                   }
                 />
