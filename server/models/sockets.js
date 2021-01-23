@@ -28,6 +28,8 @@ class Sockets {
                 const myTicket = this.ticketList.assignTicket(agent, work);
                 callback(myTicket);
 
+                this.io.emit('ticket-assigned', this.ticketList.last13);
+
             });
 
 

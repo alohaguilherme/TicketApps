@@ -1,51 +1,36 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Row, Col, List, Typography, Card, Tag, Divider } from 'antd';
+
+import { SocketContext } from '../context/SocketContex';
 import { useHideMenu } from '../hooks/useHideMenu';
+import { getLast } from '../helpers/getLastTickets';
 
 
 const { Title, Text } = Typography
 
-const data = [
-  {
-    ticketNo: 33,
-    work: 3,
-    agent: 'Fernando Herrera'
-  },
-  {
-    ticketNo: 34,
-    work: 4,
-    agent: 'Melissa Flores'
-  },
-  {
-    ticketNo: 35,
-    work: 5,
-    agent: 'Carlos Castro'
-  },
-  {
-    ticketNo: 36,
-    work: 3,
-    agent: 'Fernando Herrera'
-  },
-  {
-    ticketNo: 37,
-    work: 3,
-    agent: 'Fernando Herrera'
-  },
-  {
-    ticketNo: 38,
-    work: 2,
-    agent: 'Melissa Flores'
-  },
-  {
-    ticketNo: 39,
-    work: 5,
-    agent: 'Carlos Castro'
-  },
-];
 
 export const Cola = () => {
 
   useHideMenu(true)
+
+  const { socket } = useContext(SocketContext)
+  const [tickets, setTickets] = useState([])
+
+  useEffect(() => {
+    getLast().then(setTickets);
+  }, [])
+
+  useEffect(() => {
+
+    socket.on('ticket-assigned', (assigned) => {
+      setTickets(assigned);
+    });
+
+    return () => {
+      socket.off('ticket-assigned');
+    }
+
+  }, [socket])
 
   return (
     <>
@@ -53,7 +38,7 @@ export const Cola = () => {
       <Row>
         <Col span={12}>
           <List
-            dataSource={data.slice(0, 3)}
+            dataSource={tickets.slice(0, 3)}
             renderItem={item => (
               <List.Item>
                 <Card
@@ -64,7 +49,7 @@ export const Cola = () => {
                   ]
                   }
                 >
-                  <Title>No.{item.ticketNo}</Title>
+                  <Title>No.{item.number}</Title>
                 </Card>
               </List.Item>
             )}
@@ -74,15 +59,15 @@ export const Cola = () => {
         <Col span={12}>
           <Divider>Histórico</Divider>
           <List
-            dataSource={data.slice(3)}
+            dataSource={tickets.slice(3)}
             renderItem={item => (
               <List.Item>
                 <List.Item.Meta
-                  title={`Ticket no. ${item.ticketNo}`}
+                  title={`Ticket no. ${item.number}`}
                   description={
                     <>
                       <Text>No escritório: </Text>
-                      <Tag color="magenta">{item.ticketNo}</Tag>
+                      <Tag color="magenta">{item.work}</Tag>
                       <Text>agent: </Text>
                       <Tag color="volcano">{item.agent}</Tag>
                     </>
